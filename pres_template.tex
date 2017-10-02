@@ -144,6 +144,52 @@ Poromechanics - Temperature Dynamics - Chemical transport
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical Plattofrm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Numerical platform}
+\begin{columns}
+\begin{column}{0.45\textwidth}
+\includegraphics[width=0.8\columnwidth]{figure/logogetfem}
+\begin{block}{GetFem}
+\begin{itemize}
+\item c++ finite element platform
+\item Generic assembly language
+\item Level-set and finite element cut 
+	by one or several level-set (Xfem) 
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.45\textwidth}
+\begin{block}{SAMG library}
+Algebraic Multigrid Methods for Systems
+\begin{itemize}
+\item solution of large linear systems
+\item higly scalable
+\item easy to integrate
+\end{itemize}
+\end{block}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Geometric VS Algebraic}
+\centering
+\vfill
+\includegraphics[width=0.7\textwidth]{figure/compex1.png}
+\vfill
+\includegraphics[width=0.7\textwidth]{figure/compex2.png}
+\vfill
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Integration}
+\includegraphics[width=0.9\textwidth]{figure/flowchart}
+\begin{itemize}
+\item Simple interface (CSR matrix)
+\item Same programming language
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
