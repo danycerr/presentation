@@ -142,28 +142,39 @@ Poromechanics - Temperature Dynamics - Chemical transport
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Constitutive law}
-		\begin{equation}
+		\begin{equation*}
 			\mu=1.002\, 10^{-3} \left( 1+ \alpha_1(T) +\alpha_2(C_M) \right)
-		\end{equation}
+		\end{equation*}
 		 
-		\begin{equation}
+		\begin{equation*}
 			\rho_l =  \rho_0(1+\beta_1(T)+ \beta_2(C_M) )\, .
 			\label{consrho}
-		\end{equation}
+		\end{equation*}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Ice fraction}
-\begin{equation}
+\begin{equation*}
+\theta_l =S_i \phi_i
+\end{equation*} 
+\begin{equation*}
 S_i=\left\{
 \begin{aligned}
-						&1 \quad & T > T_L \,,\\
-						&(1-S_{lres})\exp\left[ - \left( \frac{T-T_L}{w}\right)^2 \right] +S_{lres} \quad & T_L> T > T_{lres}\,,\\
-						&S_{lres}  \quad &  T < T_{lres}\,,
-					\end{aligned}
-					\right.
-				\end{equation}
+&1 \quad & T > T_L \,,\\
+&(1-S_{lres})\exp\left[ - \left( \frac{T-T_L}{w}\right)^2 \right] +
+S_{lres} \quad & T_L> T > T_{lres}\,,\\
+&S_{lres}  \quad &  T < T_{lres}\,.
+\end{aligned}
+\right.
+\end{equation*}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Geometric VS Algebraic}
+\centering
+\vfill
+\includegraphics[width=0.7\textwidth]{figure/axialice}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical Plattofrm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
