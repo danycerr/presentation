@@ -171,8 +171,7 @@ S_{lres} \quad & T_L> T > T_{lres}\,,\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Geometric VS Algebraic}
 \centering
-\vfill
-\includegraphics[width=0.7\textwidth]{figure/axialice}
+\includegraphics[width=0.7\textwidth]{figure/top_pres}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical Plattofrm}
