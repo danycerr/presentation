@@ -68,9 +68,79 @@ Politecnico di Milano\\ % Your institution for the title page
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Background and Motivations}
+\begin{columns}
+\begin{column}{0.65\textwidth}
+\begin{block}{Key processes of sedimentary basin evolution:} 
+\begin {itemize}
+\item  geomechanics and dynamic evolution of stress and deformations; 
+\item  transport of dissolved chemicals; 
+\item geochemical reactive processes.
+\end{itemize}
+\end{block}
+\begin{block}{The effects of glaciations on the subsurface:} 
+\begin {itemize}
+\item  the mechanical compaction due to the load of ice sheets; 
+\item  the deformation of the lithosphere by isostasy; 
+\item  the subglacial meltwater; 
+\item  the generation of permafrost. 
+\end{itemize}
+\end{block}
+\end{column}
+\begin{column}{0.35\textwidth}
+\includegraphics[width=0.9\textwidth]{figure/intro1}
+\includegraphics[width=0.9\textwidth]{figure/intro2}
+\end{column}
+\end{columns}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Mathematical model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Poromechanics}
+	\begin{align*}
+ 	-\nabla \cdot \left(  2\mu\varepsilon (\mathbf{u}) + \nabla\cdot \mathbf{u}\right) + \alpha \nabla p=\rho\mathbf{g} \, ,\\
+ 	\partial_t \left(\frac{p}{M} + \alpha \nabla \cdot \mathbf{u}\right)+ \nabla\cdot \mathbf{u_d}=S_f\,,\\ 
+ 	\mathbf{K}^{-1}\mathbf{u_d} + \nabla p = \rho_f\mathbf{g}\,,
+ \end{align*}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Temperature Dynamics}
+	\begin{align*}
+ 	C_T\frac{\partial T}{\partial t} +
+ 	\left(  \phi\rho_l c_l \mathbf{v_l} 
+ 	+  (1 - \phi)\rho_s c_s \mathbf{v_s} \right)\cdot \nabla T- K_T \nabla^2 T 
+ 	= Q\,.
+ \end{align*}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Chemical transport}
+	\begin{align*}
+ 	C_T\frac{\partial C}{\partial t} +
+ 	\mathbf{u_D} \cdot \nabla C- D\nabla^2 T 
+ 	= Q_c\,.
+ \end{align*}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Coupled model}
+Poromechanics - Temperature Dynamics - Chemical transport
+	\begin{align*}
+ 	-\nabla \cdot \left(  2\mu\varepsilon (\mathbf{u}) + \nabla\cdot \mathbf{u}\right) + \alpha \nabla p=\rho\mathbf{g} \, ,\\
+ 	\partial_t \left(\frac{p}{M} + \alpha \nabla \cdot \mathbf{u}\right)+ \nabla\cdot \mathbf{u_d}=S_f\,,\\ 
+ 	\mathbf{K}^{-1}\mathbf{u_d} + \nabla p = \rho_f\mathbf{g}\,,\\
+ 	C_T\frac{\partial T}{\partial t} +
+ 	\left(  \phi\rho_l c_l \mathbf{v_l} 
+ 	+  (1 - \phi)\rho_s c_s \mathbf{v_s} \right)\cdot \nabla T- K_T \nabla^2 T 
+ 	= Q\,.\\
+ 	C_T\frac{\partial C}{\partial t} +
+ 	\mathbf{u_D} \cdot \nabla C- D\nabla^2 T 
+ 	= Q_c\,.
+ \end{align*}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical Plattofrm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
