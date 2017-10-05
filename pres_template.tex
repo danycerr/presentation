@@ -78,6 +78,22 @@ Politecnico di Milano\\ % Your institution for the title page
 \item geochemical reactive processes.
 \end{itemize}
 \end{block}
+\end{column}
+\begin{column}{0.35\textwidth}
+\includegraphics[width=0.9\textwidth]{figure/intro1}
+\includegraphics[width=0.9\textwidth]{figure/aquafier}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Background and Motivations}
+\centering
+\includegraphics[width=0.9\textwidth]{figure/ice_age_snows}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Background and Motivations}
+\begin{columns}
+\begin{column}{0.65\textwidth}
 \begin{block}{The effects of glaciations on the subsurface:} 
 \begin {itemize}
 \item  the mechanical compaction due to the load of ice sheets; 
@@ -88,8 +104,7 @@ Politecnico di Milano\\ % Your institution for the title page
 \end{block}
 \end{column}
 \begin{column}{0.35\textwidth}
-\includegraphics[width=0.9\textwidth]{figure/intro1}
-\includegraphics[width=0.9\textwidth]{figure/intro2}
+\includegraphics[width=0.9\textwidth]{figure/basin_glacial}
 \end{column}
 \end{columns}
 \end{frame}
@@ -168,7 +183,110 @@ S_{lres} \quad & T_L> T > T_{lres}\,,\\
 \end{equation*}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{1D prototype}
+\begin{frame}{geco}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\includegraphics[width=0.9\columnwidth]{figure/gecoover}
+\end{column}
+\begin{column}{0.7\textwidth}
+\begin{tabular}{lccc}
+Materials &  (Pa$^{-1}$) & K ($m^2$) & h (m)\\ 
+7 Aquifer & $10^{-9}$ & $10^{-12} $ & $825$\\
+6 Shale & $ 5 \, 10^{-8}$ & $ 10^{-16} $  $400$\\
+5 Aquifer & $10^{-9}$ & $10^{-13} $ & $825$\\
+4 Shale & $ 10^{-8}$ & $ 10^{-17} $ & $500$\\
+3 Aquifer & $5 \, 10^{-10}$ & $10^{-14} $ & $825$\\
+2 Shale & $5 \, 10^{-9}$ & $10^{-18} $ & $800$\\
+1 Aquifer & $5 \, 10^{-10}$ & $10^{-14} $ & $825$\\
+\end{tabular}
+\end{column}
+\end{columns}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Set up}
+\begin{columns}
+\uncover<2->{
+\begin{column}{0.25\textwidth}
+\includegraphics[width=0.8\columnwidth]{figure/test_case}
+\end{column}
+}
+\uncover<3->{
+\begin{column}{0.7\textwidth}
+\ \\
+\vspace{0.2cm}
+\begin{align*}
+& h_b(t=0)=5000m\\
+& D  =10^{-10} m^2/s \\
+& C (t=0) = -\frac{(0.4-0.1)}{h_b}z + 0.1\\ 
+& C (z_a, t) =0, \partial C / \partial z | _{z_b} =0\\
+& dt = 0.3 y , \quad \Delta t =10 y\\
+& h_s=500 m , 2000 m , \frac{2000}{\Delta t}t 
+\end{align*}
+\end{column}
+}
+\end{columns}
+\tiny{
+\begin{thebibliography}{99} % Beamer does not support BibTeX so references must be inserted manually as below
+\bibitem[Smith, 2012]{p1} Bense, V. F., and M. A. Person. (2008)
+\newblock Transient hydrodynamics within intercratonic sedimentary basins during glacial cycles.
+\newblock \emph{Journal of Geophysical Research} 113.F4 .
+\end{thebibliography}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Test case}\uncover<2->{
+\includegraphics[width=0.2\textwidth]{figure/test_case}\uncover<3->{
+\includegraphics[width=0.7\textwidth]{figure/hice}\\}}
+{\centering
+$\Delta t_{tot} = 32 Ky \qquad \Delta t _0 =0.1y \qquad \Delta t_{max}= 0.1Ky$\\
+$ h_b(t=0)=5000m \qquad D  =10^{-10} m^2/s  \qquad \theta_{l}=S_l\phi$
+}
+\begin{thebibliography}{99} 
+\bibitem[Smith, 2012]{p1} Bense, V. F., and M. A. Person. (2008)
+\newblock Transient hydrodynamics within intercratonic sedimentary basins during glacial cycles.
+\newblock \emph{Journal of Geophysical Research} 113.F4 .
+\bibitem[jenkins2011convection]{beh}Jenkins, A
+\newblock Convection-driven melting near the grounding lines of ice shelves and
+  tidewater glaciers.
+\newblock {\em Journal of Physical Oceanography}, 41(12):2279--2294, 2011.
+\end{thebibliography}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Test case}\uncover<1->{
+\includegraphics[width=0.2\textwidth]{figure/test_case}\uncover<1->{
+\includegraphics[width=0.7\textwidth]{figure/tempice}\\}}
+{\centering
+$\Delta t_{tot} = 32 Ky \qquad \Delta t _0 =0.1y \qquad \Delta t_{max}= 0.1Ky$\\
+$ h_b(t=0)=5000m \qquad D  =10^{-10} m^2/s  \qquad \theta_{l}=S_l\phi$
+}
+\begin{thebibliography}{99} 
+\bibitem[Smith, 2012]{p1} Bense, V. F., and M. A. Person. (2008)
+\newblock Transient hydrodynamics within intercratonic sedimentary basins during glacial cycles.
+\newblock \emph{Journal of Geophysical Research} 113.F4 .
+\bibitem[jenkins2011convection]{beh}Jenkins, A
+\newblock Convection-driven melting near the grounding lines of ice shelves and
+  tidewater glaciers.
+\newblock {\em Journal of Physical Oceanography}, 41(12):2279--2294, 2011.
+\end{thebibliography}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Test cases}
+\begin{tabular}{c|c|c}
+\includegraphics[width=0.19\textwidth]{figure/gecoover}&
+\includegraphics[width=0.386\textwidth]{figure/coldchannel}&
+\includegraphics[width=0.386\textwidth]{figure/hotchannel}\\
+A & B & C 
+\end{tabular}
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Ice evolution}
 \centering
 \includegraphics[width=0.7\textwidth]{figure/top_pres}
