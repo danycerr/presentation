@@ -29,7 +29,8 @@
 %{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{background.jpg}}
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
-
+\definecolor{cerulean}{rgb}{0.0, 0.48, 0.65}
+\definecolor{cinnamon}{rgb}{0.82, 0.41, 0.12}
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -45,11 +46,25 @@ Politecnico di Milano\\ % Your institution for the title page
 }
 \date{\today} % Date, can be changed to a custom date
 \usepackage{tikz}
+\usetikzlibrary{mindmap,trees, positioning}
+\usepackage{adjustbox}
+%%%%%%%%blocks
+\usetikzlibrary{shapes,arrows}
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, text width=15em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex    ]
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm, minimum height=2em]
+
 \usepackage{amsmath}
 \usepackage{verbatim}
 \usetikzlibrary{arrows,shapes}
 \renewcommand\mathfamilydefault{\rmdefault}
-
+  % put color to \boxed math command
+\newcommand*{\boxcolor}{orange}
+\makeatletter
+\renewcommand{\boxed}[2]{\textcolor{#2}{%
+\tikz[baseline={([yshift=-1ex]current bounding box.center)}] \node [rectangle, minimum width=1ex,rounded corners,fill=#2!40,draw] {\normalcolor\m@th$\displaystyle#1$};}}
+ \makeatother
 
 
 \setbeamertemplate{background}
@@ -93,7 +108,7 @@ Politecnico di Milano\\ % Your institution for the title page
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Background and Motivations}
 \begin{columns}
-\begin{column}{0.65\textwidth}
+\begin{column}{0.45\textwidth}
 \begin{block}{The effects of glaciations on the subsurface:} 
 \begin {itemize}
 \item  the mechanical compaction due to the load of ice sheets; 
@@ -103,75 +118,92 @@ Politecnico di Milano\\ % Your institution for the title page
 \end{itemize}
 \end{block}
 \end{column}
-\begin{column}{0.35\textwidth}
+\begin{column}{0.5\textwidth}
 \includegraphics[width=0.9\textwidth]{figure/basin_glacial}
 \end{column}
 \end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Conceptual}
+\begin{adjustbox}{max totalsize={.9\textwidth}{.7\textheight},center}
+ \begin{tikzpicture}
+  \path[mindmap,concept color=black,text=white]
+    node[concept] {STREAM THMC}
+    [clockwise from=0]
+    child[concept color=green!50!black] { node[concept] {Mechanical}    }  
+    child[concept color=blue] {node[concept] {Transport}}
+    child[concept color=red] { node[concept] {Geochemical} }
+    child[concept color=orange] { node[concept] {Heat transfer} };
+\end{tikzpicture}
+\end{adjustbox}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Mathematical model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Poromechanics}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=0.9\columnwidth]{figure/poromech}
+\end{column}
+\begin{column}{0.4\textwidth}
 	\begin{align*}
  	-\nabla \cdot \left(  2\mu\varepsilon (\mathbf{u}) + \nabla\cdot \mathbf{u}\right) + \alpha \nabla p=\rho\mathbf{g} \, ,\\
  	\partial_t \left(\frac{p}{M} + \alpha \nabla \cdot \mathbf{u}\right)+ \nabla\cdot \mathbf{u_d}=S_f\,,\\ 
  	\mathbf{K}^{-1}\mathbf{u_d} + \nabla p = \rho_f\mathbf{g}\,,
  \end{align*}
+\end{column}
+\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Temperature Dynamics}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=0.9\columnwidth]{figure/poromechhot}
+\end{column}
+\begin{column}{0.4\textwidth}
 	\begin{align*}
- 	C_T\frac{\partial T}{\partial t} +
- 	\left(  \phi\rho_l c_l \mathbf{v_l} 
- 	+  (1 - \phi)\rho_s c_s \mathbf{v_s} \right)\cdot \nabla T- K_T \nabla^2 T 
+ 	& C_T\frac{\partial T}{\partial t} - K_T \nabla^2 T \\ 
+ 	& +\left(  \phi\rho_l c_l \mathbf{v_l} 
+ 	+  (1 - \phi)\rho_s c_s \mathbf{v_s} \right)\cdot \nabla T
  	= Q\,.
  \end{align*}
+\end{column}
+\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Chemical transport}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=0.9\columnwidth]{figure/poromechwater}
+\end{column}
+\begin{column}{0.4\textwidth}
 	\begin{align*}
  	C_T\frac{\partial C}{\partial t} +
  	\mathbf{u_D} \cdot \nabla C- D\nabla^2 T 
  	= Q_c\,.
  \end{align*}
+\end{column}
+\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Coupled model}
-Poromechanics - Temperature Dynamics - Chemical transport
-	\begin{align*}
- 	-\nabla \cdot \left(  2\mu\varepsilon (\mathbf{u}) + \nabla\cdot \mathbf{u}\right) + \alpha \nabla p=\rho\mathbf{g} \, ,\\
- 	\partial_t \left(\frac{p}{M} + \alpha \nabla \cdot \mathbf{u}\right)+ \nabla\cdot \mathbf{u_d}=S_f\,,\\ 
- 	\mathbf{K}^{-1}\mathbf{u_d} + \nabla p = \rho_f\mathbf{g}\,,\\
- 	C_T\frac{\partial T}{\partial t} +
- 	\left(  \phi\rho_l c_l \mathbf{v_l} 
- 	+  (1 - \phi)\rho_s c_s \mathbf{v_s} \right)\cdot \nabla T- K_T \nabla^2 T 
- 	= Q\,.\\
- 	C_T\frac{\partial C}{\partial t} +
- 	\mathbf{u_D} \cdot \nabla C- D\nabla^2 T 
- 	= Q_c\,.
- \end{align*}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Constitutive law}
-		\begin{equation*}
-			\mu=1.002\, 10^{-3} \left( 1+ \alpha_1(T) +\alpha_2(C_M) \right)
-		\end{equation*}
-		 
-		\begin{equation*}
-			\rho_l =  \rho_0(1+\beta_1(T)+ \beta_2(C_M) )\, .
-			\label{consrho}
-		\end{equation*}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Ice fraction}
+\setbeamercolor{block title}{bg=olive!50!white}
+\setbeamercolor{block body}{bg=olive!30!white}
+\begin{block}{Porosity}
 \begin{equation*}
 \theta_l =S_i \phi_i
 \end{equation*} 
+\end{block}
+{
+\setbeamercolor{block title}{bg=cerulean!50!white}
+\setbeamercolor{block body}{bg=cerulean!30!white}
+\begin{block}{Ice fraction}
+%{\resizebox{1cm}{!}{
 \begin{equation*}
+\small
 S_i=\left\{
 \begin{aligned}
 &1 \quad & T > T_L \,,\\
@@ -181,9 +213,132 @@ S_{lres} \quad & T_L> T > T_{lres}\,,\\
 \end{aligned}
 \right.
 \end{equation*}
+%}}
+\end{block}
+}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Constitutive law}
+\setbeamercolor{block title}{bg=cerulean!50!white}
+\setbeamercolor{block body}{bg=cerulean!30!white}
+\begin{block}{}
+		\begin{equation*}
+			\mu=1.002\, 10^{-3} \left( 1+ \alpha_1(T) +\alpha_2(C_M) \right)
+		\end{equation*}
+		 
+		\begin{equation*}
+			\rho_l =  \rho_0(1+\beta_1(T)+ \beta_2(C_M) )\, .
+			\label{consrho}
+		\end{equation*}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{block}
+{
+ \setbeamercolor{block title}{bg=olive!50!white}
+\setbeamercolor{block body}{bg=olive!30!white}
+\begin{block}{Permeability}
+\begin{equation*}
+k=k_pK; \, k_p=\left\{
+\begin{aligned}
+&1 \quad & T > T_L \,,\\
+& \left( \frac{k_{min}-1}{T_l}\right)T +1 \quad & T_L> T > T_{lres}\,,\\
+&k_{min}  \quad &  T < T_{lres}\,.
+\end{aligned}
+\right.
+\end{equation*}
+\end{block}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Coupled model}
+Poromechanics - Temperature Dynamics - Chemical transport
+	\begin{equation*}
+	 \begin{split}
+	   	-\nabla \cdot \left(  2\mu\varepsilon (\mathbf{u}) + \lambda\nabla\cdot \mathbf{u}\right) + \alpha \nabla p=\rho\mathbf{g} \label{momentum}\, ,\\
+ 	\partial_t \left(\frac{p}{M} + \alpha \nabla \cdot \mathbf{u}\right)+ \nabla\cdot \mathbf{u_d}=S_f\,,\\ 
+ 	\mathbf{K}^{-1}\mathbf{u_d} + \nabla p = \rho_f\mathbf{g}\,.\\
+	 \end{split}
+	\end{equation*}
+	\begin{equation*}
+ 	C_D\frac{\partial C}{\partial t} +
+ 	\mathbf{u_D} \cdot \nabla C- D\nabla^2 C 
+ 	= Q_c\,.
+ 	\end{equation*}
+	\begin{equation*}
+ 	C_T\frac{\partial T}{\partial t} +
+ 	\left(  \phi\rho_l c_l \mathbf{v_l} 
+ 	+  (1 - \phi)\rho_s c_s \mathbf{v_s} \right)\cdot \nabla T- K_T \nabla^2 T 
+ 	= Q\,.
+ 	\end{equation*}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Coupled model}
+Poromechanics - Temperature Dynamics - Chemical transport
+	\begin{equation*}\boxed{
+	 \begin{split}
+	   	-\nabla \cdot \left(  2\mu\varepsilon (\mathbf{u}) + \lambda\nabla\cdot \mathbf{u}\right) + \alpha \nabla p=\rho\mathbf{g} \label{momentum}\, ,\\
+ 	\partial_t \left(\frac{p}{M} + \alpha \nabla \cdot \mathbf{u}\right)+ \nabla\cdot \mathbf{u_d}=S_f\,,\\ 
+ 	\mathbf{K}^{-1}\mathbf{u_d} + \nabla p = \rho_f\mathbf{g}\,.\\
+	 \end{split}}{orange}
+	\end{equation*}
+	\begin{equation*}\boxed{
+ 	C_D\frac{\partial C}{\partial t} +
+ 	\mathbf{u_D} \cdot \nabla C- D\nabla^2 C 
+ 	= Q_c\,.}{blue}
+ 	\end{equation*}
+	\begin{equation*}\boxed{
+ 	C_T\frac{\partial T}{\partial t} +
+ 	\left(  \phi\rho_l c_l \mathbf{v_l} 
+ 	+  (1 - \phi)\rho_s c_s \mathbf{v_s} \right)\cdot \nabla T- K_T \nabla^2 T 
+ 	= Q\,.}{green}
+ 	\end{equation*}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{1D prototype}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\begin{frame}{STREAM 1D THMC (Matlab prototype) Frozen Geco}
+\ 
+\\  
+\begin{columns}
+\begin{column}{0.6\textwidth}
+Momentum
+\begin{equation*}
+\phi(u^l-u^s)=-\frac{K}{\mu^l}\left(\frac{d p^l}{dz}  -\rho^l \mathbf{g}\right)
+\end{equation*}
+Geomechanics
+\begin{equation*}
+\frac{d\phi_M}{dt}=-\beta(\phi_0-\phi_f)\exp(-\beta\sigma)\frac{d\sigma}{dt}
+\end{equation*}
+Heat transfer
+\begin{equation*}
+C_t\frac{dT}{dt} + \rho c \mathbf{u}_d\cdot \frac{dT}{dz}  - K \frac{d T^2}{dz^2} =0
+\end{equation*}
+Chemical Transport
+\begin{equation*}
+\phi \rho_l \frac{\partial C}{\partial t} +  \rho_l \mathbf{u}_d\cdot
+\frac{dC}{dz}  = \phi \rho_l D \frac{d C^2}{dz^2}
+\end{equation*}
+% \begin{equation*}
+% (\phi_m - \phi_f)\exp \left(-\frac{z_t-z}{\phi_c}\right) + \phi_f
+% \end{equation*}
+\end{column}
+\begin{column}{0.5 \textwidth}
+$u^l$ liquid velocity\\
+$u^s$ solid velocity\\
+$u_d$ Darcy velocity\\
+$\sigma$ axial effective stress\\
+\vspace{1cm}
+ \begin{itemize}
+  \item Mono dimensional domain
+  \item Transient simulation
+  \item Ice formation
+  \item Complex constitutive models
+ \end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{geco}
 \begin{columns}
 \begin{column}{0.2\textwidth}
@@ -287,11 +442,6 @@ A & B & C
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{Ice evolution}
-\centering
-\includegraphics[width=0.7\textwidth]{figure/top_pres}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical Plattofrm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -340,6 +490,41 @@ Algebraic Multigrid Methods for Systems
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Benchmark}
+ \begin{columns}
+  \begin{column}{0.45\textwidth}
+    \begin{align*}
+ 	-\nabla \cdot \left(  2\mu\varepsilon (\mathbf{u}) + \nabla\cdot \mathbf{u}\right) + \alpha \nabla p=\mathbf{0} \, ,\\
+ 	\partial_t \left(\frac{p}{M} + \alpha \nabla \cdot \mathbf{u}\right)+ \nabla\cdot \mathbf{u_d}=S_f\,,\\ 
+ 	\mathbf{K}^{-1}\mathbf{u_d} + \nabla p = \mathbf{0}\,,\\
+ \end{align*}
+  \end{column}
+    \begin{column}{0.45\textwidth} 
+    \\ 
+  {\bf Mandel benchmark}
+    \centering
+    \includegraphics[width=0.7\columnwidth]{figure/madleysvg}
+    \end{column}
+ \end{columns}
+
+ \begin{itemize}
+ \item 
+ Both, Jakub Wiktor, et al. 
+ \textit{Robust fixed stress splitting for Biot's equations in heterogeneous media.
+ Applied Mathematics Letters 2017.}
+  \item
+Cui, L., et al.
+  \textit{Finite element analyses of anisotropic 
+  poroelasticity: a generalized Mandel's 
+  problem and an inclined borehole problem.,
+  International Journal for Numerical and Analytical Methods in Geomechanics,
+  1996.} 
+  \end{itemize}
+
+\end{frame}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
